@@ -1,0 +1,38 @@
+create table if not exists user_details
+(
+username varchar(50) PRIMARY KEY NOT NULL,
+password varchar(100) NOT NULL,
+contactNo varchar(50) NOT NULL, 
+firstName varchar(100) NOT NULL,
+lastName varchar(100) NOT NULL,
+college_name varchar(100) NOT NULL,
+department varchar(100) NOT NULL,
+email varchar(100) NOT NULL,
+role varchar(50) NOT NULL
+)ENGINE=InnoDB;
+
+create table if not exists event_details
+(
+eventId varchar(50) PRIMARY KEY NOT NULL,
+username varchar(50) NOT NULL,
+name varchar(100) NOT NULL,
+startDate date NOT NULL,
+endDate date NOT NULL,
+startTime time NOT NULL,
+endTime time NOT NULL,
+description text NOT NULL,
+entryFees varchar(100) NOT NULL,
+contactDetails varchar(100) NOT NULL,
+location varchar(100) NOT NULL,
+FOREIGN KEY (username) REFERENCES user_details(username) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+create table if not exists registeredUsers
+(
+eventId varchar(50) NOT NULL,
+username varchar(50) NOT NULL,
+FOREIGN KEY (eventId) REFERENCES event_details(eventId) ON DELETE CASCADE,
+FOREIGN KEY (username) REFERENCES user_details(username) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+
